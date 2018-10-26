@@ -1,4 +1,5 @@
 //multiple arrays containing 200 circles
+//more stuff
 int theCircles = 200;
 //winter circles
 Circle[] circles1 = new Circle[theCircles];
