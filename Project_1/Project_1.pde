@@ -1,76 +1,74 @@
+//BLIZZARD MACHINE
+
 //multiple arrays containing 200 circles
-//more stuff
 int theCircles = 200;
-//winter circles
+
 Circle[] circles1 = new Circle[theCircles];
 Circle[] circles2 = new Circle[theCircles];
 Circle[] circles3 = new Circle[theCircles];
 Circle[] circles4 = new Circle[theCircles];
 Circle[] circles5 = new Circle[theCircles];
-
-//toggle between winter and summer
-int scene = 1;
+Circle[] circles6 = new Circle[theCircles];
 
 void setup () {
+  //Pale blue background
+  background (255);
   size (800, 600);
-  noStroke ();
-  //fill the array 
+  //Fill the array 
   for (int i = 0; i < theCircles; i++) {
-    //WINTER
-    //display blue and purple circles (snow) of varying opacities in random places througout the window
+    //display white, blue, and purple circles (snow) of varying opacities in random places througout the window
 
-    //dark purple
-    circles1[i] = new Circle (random (width), random (height), random(5, 40), color (132, 147, 232, random (0, 100)));
-    //light purple
-    circles2[i] = new Circle (random (width), random (height), random(5, 40), color (196, 204, 255, random (0, 100)));
+    //white
+    circles1[i] = new Circle (random (width), random (height), random(5, 40), color (255, 255, 255, random (0, 100)));
+    //pale blue
+    circles2[i] = new Circle (random (width), random (height), random(5, 40), color (212, 236, 255, random (0, 100)));
     //light blue
-    circles3[i] = new Circle (random (width), random (height), random(5, 40), color (132, 226, 255, random (0, 100)));
-    //turquoise
-    circles4[i] = new Circle (random (width), random (height), random(5, 40), color (116, 198, 214, random (0, 100)));
+    circles3[i] = new Circle (random (width), random (height), random(5, 40), color (137, 206, 255, random (0, 100)));
+    //light purple
+    circles4[i] = new Circle (random (width), random (height), random(5, 40), color (130, 174, 255, random (0, 100)));
+    //dark purple
+    circles5[i] = new Circle (random (width), random (height), random(5, 40), color (91, 100, 255, random (0, 100)));
     //dark blue
-    circles5[i] = new Circle (random (width), random (height), random(5, 40), color (49, 95, 175, random (0, 100)));
+    circles6[i] = new Circle (random (width), random (height), random(5, 40), color (27, 63, 175, random (0, 100)));
   }
 }
 
 
 void draw () {
-  //WINTER
-  //light blue background with smooth circles
-  if (scene == 1) {
-    background (212, 236, 255);
-    smooth ();
-    for (int i = 0; i < theCircles; i++) {
+  noStroke();
+  smooth ();
 
-      //display the circles
-      //starting at 2 seconds more snow appears each second without input from the user 
-      if (millis () > 3000) {
-        circles1[i].display();
-      }
-      if (millis () > 4500) {
-        circles2[i].display();
-      }
-      if (millis () > 6000) {
-        circles3[i].display();
-      }
-      if (millis () > 7500) {
-        circles4[i].display();
-      }
-      if (millis () > 9000) {
-        circles5[i].display();
-      }
+  //display the circles (snow)
+  for (int i = 0; i < theCircles; i++) {
+
+    //starting at 3 seconds different colored snow appears every three seconds without input from the user
+    //time of day changes from daytime to nighttime 
+    if (millis () > 3000) {
+      circles1[i].display();
     }
+    if (millis () > 4500) {
+      circles2[i].display();
+    }
+    if (millis () > 9000) {
+      circles3[i].display();
+    }
+    if (millis () > 12000) {
+      circles4[i].display();
+    }
+    if (millis () > 15000) {
+      circles5[i].display();
+    }
+    if (millis () > 18000) {
+      circles6[i].display();
+    }
+
+    //when mouse is moved ellipses appear at the position of the mouse rotating randomly up to 90 degrees 
+    //moving the mouse to different positions on the screen creates different blizzard effects 
+    mouseMoved ();
+    translate(mouseX, mouseY);
+    rotate (radians (random (80))); 
+    ellipse (mouseX, mouseY, mouseX, mouseY);
   }
 
-  if (scene == 2) {
-    background (255, 250, 212);
-    }
-  }
-
-
-
-  void keyPressed() {
-    scene = scene + 1;
-    if (scene > 2) {
-      scene = 1;
-    }
-  }
+  mousePressed ();
+} 
